@@ -1,0 +1,51 @@
+{
+  "name": "fancy-graph",
+  "version": "0.0.1",
+  "author": "Eric Easthope, eric.easthope@me.com, @ericeasthope",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericeasthope/fancy-graph.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ericeasthope/fancy-graph/issues"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export",
+    "prettify": "prettier --write \"**/*.ts\" \"**/*.js\"",
+    "lint": "eslint . --ext .ts --ext .tsx",
+    "type": "tsc --jsx react",
+    "clean": "yarn lint; yarn type; yarn prettify"
+  },
+  "dependencies": {
+    "@types/react-redux": "^7.1.9",
+    "d3": "^5.16.0",
+    "d3-force-3d": "^2.1.0",
+    "d3-force-surface": "^0.5.7",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
+    "redux": "^4.0.5",
+    "styled-components": "^5.1.1"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/d3": "^5.7.2",
+    "@types/node": "^14.6.2",
+    "@types/styled-components": "^5.1.2",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
+    "babel-plugin-styled-components": "^1.11.1",
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-react": "^7.20.6",
+    "next": "^9.5.2",
+    "prettier": "^2.1.1",
+    "typescript": "^4.0.2"
+  }
+}
