@@ -1,5 +1,5 @@
 ---
-tags: react d3 typescript graph
+tags: react d3 typescript graph component-based
 ---
 
 # fancy-graph
@@ -8,7 +8,43 @@ React.js, D3.js, and TypeScript all come together with some pretty obscure NPM p
 
 ## How to use
 
-...
+See [`pages/index.tsx`] for an example.
+
+**tl;dr** (I'm not sure if it actually works yet, though.)
+
+```js
+import FancyGraph, { SVG, Graph, Link, Line, Node, Circle } from 'fancy-graph';
+
+const MyComponent = () => {
+  //  ...
+
+  return (
+    <FancyGraph>
+      <SVG centerOrigin>
+        <Graph>
+          <Link>
+            <Line
+              // Set link line colour based on data join status
+              stroke={{
+                enterStroke: 'green',
+                updateStroke: 'yellow',
+                exitStroke: 'red',
+              }}
+            />
+          </Link>
+          <Node>
+            <Circle
+              // Set node circle hover tooltip based on ID
+              title={(d) => d.id}
+            />
+          </Node>
+        </Graph>
+      </SVG>
+    <FancyGraph>
+  );
+
+export default MyComponent;
+```
 
 ## Contributing
 
