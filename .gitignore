@@ -1,0 +1,11 @@
+# macOS folder attributes
+.DS_Store
+
+# Node.js packages
+node_modules
+
+# Next.js
+.next
+
+# Development files
+_dev
