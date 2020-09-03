@@ -1,12 +1,19 @@
-// utils/forceSimulationGenerator.js
+// utils/runForceSimulation.js
 
 import React from 'react';
 import * as d3 from 'd3';
+import { D3Node, D3Link } from 'types';
 
-export function runForceSimulation(linksData, nodesData, children) {
+const runForceSimulation = (
+  linksData: D3Link[],
+  nodesData: D3Node[],
+  children: JSX.Element,
+): { _destroyer: () => void } => {
   // Map link and node array content to objects
-  const links = linksData.map((d) => Object.assign({}, d));
-  const nodes = nodesData.map((d) => Object.assign({}, d, { selected: false }));
+  const links = linksData.map((d: D3Link) => Object.assign({}, d));
+  const nodes = nodesData.map((d: D3Node) =>
+    Object.assign({}, d, { selected: false }),
+  );
 
   // Initialize a Barnes-Hut force simulator
   const simulation = d3
@@ -29,8 +36,8 @@ export function runForceSimulation(linksData, nodesData, children) {
   children.map((c) => {
     // Get data join selection and tick function for every node-like component
     if (c.type.name === 'Node') {
-      const nodeChildren = React.Children.toArray(c.props.children).map((n) => {
-        let child = n.type({ ...n.props, nodes: nodes });
+      React.Children.toArray(c.props.children).map((n) => {
+        const child = n.type({ ...n.props, nodes: nodes });
         node[child.name] = {
           selection: child.selection,
           tick: child.tick,
@@ -40,8 +47,8 @@ export function runForceSimulation(linksData, nodesData, children) {
 
     // Get data join selection and tick function for every link-like component
     if (c.type.name === 'Link') {
-      const linkChildren = React.Children.toArray(c.props.children).map((l) => {
-        let child = l.type({ ...l.props, links: links });
+      React.Children.toArray(c.props.children).map((l) => {
+        const child = l.type({ ...l.props, links: links });
         link[child.name] = {
           selection: child.selection,
           tick: child.tick,
@@ -62,4 +69,6 @@ export function runForceSimulation(linksData, nodesData, children) {
       console.log('Graph unmount.');
     },
   };
-}
+};
+
+export default runForceSimulation;
