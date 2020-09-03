@@ -1,6 +1,6 @@
 // pages/index.tsx
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import store from 'components/State';
 
@@ -11,6 +11,7 @@ import Circle from 'components/Circle';
 import Node from 'components/Node';
 import Link from 'components/Link';
 
+/*
 const TestProps = {
   nodes: [
     { id: '0', group: 0 },
@@ -32,6 +33,7 @@ const TestProps = {
   // onNodeMouseout: () => {},
   // onNodeClick: () => {},
 };
+*/
 
 /*
 forces={[

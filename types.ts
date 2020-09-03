@@ -2,20 +2,21 @@
 
 import * as d3 from 'd3';
 
-export interface D3Graph {
-  nodes: D3Node[];
-  links: D3Link[];
-}
-
 export interface D3Node extends d3.SimulationNodeDatum {
-  id: string;
+  id: string | number;
   group: number;
+  x: number;
 }
 
 export interface D3Link extends d3.SimulationLinkDatum<D3Node> {
-  source: string;
-  target: string;
+  source: string | number;
+  target: string | number;
   value: number;
+}
+
+export interface D3Graph {
+  nodes: D3Node[];
+  links: D3Link[];
 }
 
 export interface D3Word extends d3.SimulationNodeDatum {

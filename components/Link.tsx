@@ -6,7 +6,7 @@ interface LinkProps {
   children: ReactNode;
 }
 
-const Link = ({ children }: LinkProps) => {
+const Link = ({ children }: LinkProps): JSX.Element => {
   return <>{children}</>;
 };
 

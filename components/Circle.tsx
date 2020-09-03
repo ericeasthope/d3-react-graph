@@ -1,8 +1,23 @@
 // components/Circle.tsx
 
+import { ReactText } from 'react';
 import * as d3 from 'd3';
 
-const Circle = ({ nodes, title }) => {
+import { D3Node } from 'types';
+
+interface Props {
+  nodes?: D3Node[];
+  title?: string | ((d: D3Node) => string | ReactText);
+}
+
+const Circle = ({
+  nodes,
+  title,
+}: Props): JSX.Element & {
+  name: string;
+  selection: d3.Selection<SVGElement, D3Node, HTMLElement, unknown>;
+  tick: () => void;
+} => {
   const circle = d3
     .select('.nodes')
     .selectAll('circle')

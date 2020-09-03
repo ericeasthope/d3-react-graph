@@ -1,23 +1,32 @@
 // components/Graph.js
 
-import React, { useEffect, useRef } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import React, { ReactNode, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'components/State';
 import { runForceSimulation } from 'utils/forceSimulationGenerator';
 
-const Graph = ({ children, links, nodes, linksData, nodesData }) => {
+interface Props {
+  children?: ReactNode;
+}
+
+const Graph = ({ children }: Props): JSX.Element => {
   const graph = useRef(null);
+
   const dispatch = useDispatch();
+  const links = useSelector((state: RootState) => state.graph.links);
+  const nodes = useSelector((state: RootState) => state.graph.nodes);
 
   useEffect(() => {
-    let destroyer;
+    let destroyer: void | (() => void);
 
     if (graph.current) {
       console.log('Graph mount.');
-      let { destroyer } = runForceSimulation(
+      const { _destroyer } = runForceSimulation(
         links,
         nodes,
         React.Children.toArray(children),
       );
+      destroyer = _destroyer;
     }
 
     return destroyer;
@@ -39,4 +48,4 @@ const Graph = ({ children, links, nodes, linksData, nodesData }) => {
   );
 };
 
-export default connect((state) => state.graph)(Graph);
+export default Graph;

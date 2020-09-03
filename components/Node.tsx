@@ -2,14 +2,11 @@
 
 import React, { ReactNode } from 'react';
 
-interface NodeProps {
-  node: D3Node;
-  children: ReactNode;
-  color: string;
-  // clickAction: any;
+interface Props {
+  children?: ReactNode;
 }
 
-const Node = ({ children }) => {
+const Node = ({ children }: Props): JSX.Element => {
   return <>{children}</>;
 };
 

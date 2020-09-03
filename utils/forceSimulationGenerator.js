@@ -57,7 +57,7 @@ export function runForceSimulation(linksData, nodesData, children) {
   });
 
   return {
-    destroy: () => {
+    _destroyer: () => {
       simulation.stop();
       console.log('Graph unmount.');
     },
