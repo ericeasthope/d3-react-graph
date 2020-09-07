@@ -24,7 +24,6 @@ const Line = ({
   strokeWidth,
 }: Props): JSX.Element & {
   name: string;
-  selection: d3.Selection<SVGLineElement, D3Link, SVGElement, unknown>;
   tick: () => void;
 } => {
   const { enterStroke, updateStroke, exitStroke } = stroke;
@@ -37,11 +36,11 @@ const Line = ({
       (update) => update.attr('stroke', updateStroke),
       (exit) => exit.attr('stroke', exitStroke).remove(),
     )
-    .attr('stroke-width', strokeWidth);
+    .attr('stroke-width', strokeWidth ? strokeWidth : 1) // (d) => Math.sqrt(d.value ? d.value : 1));
+    .attr('stroke-opacity', 0.6);
 
   return {
     name: 'line',
-    selection: link,
     tick: () => {
       link
         .attr('x1', (d: D3Link & { source: { x: number } }) => d.source.x)

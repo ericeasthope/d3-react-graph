@@ -1,8 +1,7 @@
-// components/Circle.tsx
+// components/Circles.tsx
 
-import { ReactText } from 'react';
+// import { ReactText } from 'react';
 import * as d3 from 'd3';
-
 import { D3Node } from 'types';
 
 interface Props {
@@ -15,28 +14,49 @@ const Circle = ({
   title,
 }: Props): JSX.Element & {
   name: string;
-  selection: d3.Selection<SVGElement, D3Node, HTMLElement, unknown>;
   tick: () => void;
 } => {
   const circle = d3
     .select('.nodes')
     .selectAll('circle')
-    .data(nodes)
+    .data(nodes, (d) => d.id)
     .join(
-      (enter) => enter.append('circle').attr('fill', 'green'),
-      (update) => update.attr('fill', 'gray'),
-      (exit) => exit.remove(),
+      (enter) => {
+        console.log('Circle enter.');
+        return enter
+          .append('circle')
+          .attr('fill', 'green')
+          .attr('r', (d) => (d.r ? d.r : 8));
+      },
+      (update) =>
+        update
+          .transition()
+          .duration(250)
+          .attr('fill', 'gray')
+          .attr('r', (d) => (d.r ? d.r : 8)),
+      (exit) =>
+        exit
+          .attr('fill', 'red')
+          .transition()
+          .style('opacity', 0)
+          .attr('r', 0)
+          .on('end', function () {
+            d3.select(this).remove();
+          }),
     )
     .attr('stroke', '#fff')
-    .attr('stroke-width', 1)
-    .attr('r', 8);
+    .attr('stroke-width', 1);
 
   circle.append('title').text(title);
 
   return {
     name: 'circle',
-    selection: circle,
     tick: () => circle.attr('cx', (d) => d.x).attr('cy', (d) => d.y),
+    /*
+        .attr('r', (d: any) =>
+          5 + (3 * d.z) / 20 > 0 ? 5 + (3 * d.z) / 20 : 0,
+        ),
+        */
   };
 };
 
