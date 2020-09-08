@@ -17,5 +17,5 @@
     "noEmit": true
   },
   "exclude": ["node_modules", "_dev", ".git", ".next"],
-  "include": ["types/*.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx"]
 }
