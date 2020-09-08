@@ -1,6 +1,5 @@
 // components/Zoomable.tsx
 
-import { ReactText } from 'react';
 import * as d3 from 'd3';
 
 const Zoomable = ({
@@ -8,13 +7,13 @@ const Zoomable = ({
   disableDoubleClick,
   disableTranslation,
 }): JSX.Element => {
-  const width = d3.select('svg').node().getBoundingClientRect().width;
-  const height = d3.select('svg').node().getBoundingClientRect().height;
+  // const width = d3.select('svg').node().getBoundingClientRect().width;
+  // const height = d3.select('svg').node().getBoundingClientRect().height;
 
   const zoomable = d3.select('svg').call(
     d3
       .zoom()
-      .scaleExtent([1, 100])
+      // .scaleExtent([1, 100])
       .on('zoom', function () {
         const e = d3.event.transform;
 
