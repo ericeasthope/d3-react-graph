@@ -2,14 +2,17 @@
 
 import SVG from './SVG';
 import Graph from './Graph';
-import Circle from './Circle';
-import Node from './Node';
-import Line from './Line';
-import Link from './Link';
-import LinkText from './LinkText';
 import Zoomable from './Zoomable';
-import LogoNode from './LogoNode';
-import BlankNode from './BlankNode';
+
+import Circle from './nodes/Circle';
+import Node from './nodes/Node';
+import LogoNode from './nodes/LogoNode';
+import BlankNode from './nodes/BlankNode';
+
+import Line from './edges/Line';
+import Link from './edges/Link';
+import LinkText from './edges/LinkText';
+import BlankLink from './edges/BlankLink';
 
 export {
   SVG,
@@ -22,4 +25,5 @@ export {
   Zoomable,
   LogoNode,
   BlankNode,
+  BlankLink,
 };
