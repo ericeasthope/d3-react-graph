@@ -22,7 +22,7 @@ const LinkText = ({ children, links }: Props): JSX.Element => {
     );
 
   children.map((c) => {
-    let text = g
+    const text = g
       .append('text')
       .text(c.text)
       .attr('text-anchor', 'middle')
@@ -83,3 +83,27 @@ const LinkText = ({ children, links }: Props): JSX.Element => {
 };
 
 export default LinkText;
+
+/*
+const Text = React.forwardRef(({ title, color, width, text }, ref) => {
+  return (
+    <text
+      className="link"
+      ref={ref}
+      textAnchor="middle"
+      style={{
+        fontSize: '8px',
+        cursor: 'default',
+        WebkitUserSelect: 'none',
+        MozUserSelect: 'none',
+        msUserSelect: 'none',
+        userSelect: 'none',
+      }}
+      fill={color}
+      alignmentBaseline="middle"
+    >
+      {text}
+    </text>
+  );
+});
+*/

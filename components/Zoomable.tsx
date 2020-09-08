@@ -7,7 +7,7 @@ const Zoomable = ({
   disablePan,
   disableDoubleClick,
   disableTranslation,
-}): JSX.Element & {} => {
+}): JSX.Element => {
   const width = d3.select('svg').node().getBoundingClientRect().width;
   const height = d3.select('svg').node().getBoundingClientRect().height;
 

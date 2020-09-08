@@ -1,9 +1,9 @@
 // components/Graph.tsx
 
-import React, { useEffect, useRef } from 'react';
+import React, { ReactNode, useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import { D3Types } from 'types';
-import { runForceSimulation, executeConfigurables } from 'utils';
+import { runForceSimulation, executeConfigurables } from './utils';
 
 /*
 interface Props {
@@ -40,7 +40,15 @@ onNodeMouseout,
 onNodeClick,
 */
 
-const Graph = ({ children, nodes, links }: {}): JSX.Element => {
+const Graph = ({
+  children,
+  nodes,
+  links,
+}: {
+  children: ReactNode;
+  nodes: D3Node[];
+  links: D3Link[];
+}): JSX.Element => {
   const simulation = useRef(null);
 
   // Initialize reference to graph SVG container
@@ -77,7 +85,7 @@ const Graph = ({ children, nodes, links }: {}): JSX.Element => {
     });
   }, [nodes, links]);
 
-  useEffect(() => {}, [links]);
+  // useEffect(() => {}, [links]);
 
   return (
     <g ref={graph}>

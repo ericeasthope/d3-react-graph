@@ -39,6 +39,14 @@ const Line = ({
     .attr('stroke-width', strokeWidth ? strokeWidth : 1) // (d) => Math.sqrt(d.value ? d.value : 1));
     .attr('stroke-opacity', 0.6);
 
+  /*
+  style={{
+    // stroke: '#111',
+    strokeOpacity: 1,
+  }}
+  strokeWidth={Math.sqrt(link.value ? link.value : 1)}
+  */
+
   return {
     name: 'line',
     tick: () => {
@@ -52,3 +60,19 @@ const Line = ({
 };
 
 export default Line;
+
+/*
+const Line = React.forwardRef(({ title, color, width, dashed }, ref) => {
+  return (
+    <line
+      stroke={color}
+      className="link"
+      ref={ref}
+      strokeDasharray={dashed ? '2' : null}
+      strokeWidth={Math.sqrt(width)}
+    >
+      <title>{title}</title>
+    </line>
+  );
+});
+*/
