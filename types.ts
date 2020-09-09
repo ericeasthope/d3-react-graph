@@ -8,7 +8,7 @@ export interface D3Node extends d3.SimulationNodeDatum {
   x: number;
 }
 
-export interface D3Link extends d3.SimulationLinkDatum<D3Node> {
+export interface D3Edge extends d3.SimulationLinkDatum<D3Node> {
   source: string | number;
   target: string | number;
   value: number;
@@ -16,7 +16,7 @@ export interface D3Link extends d3.SimulationLinkDatum<D3Node> {
 
 export interface D3Graph {
   nodes: D3Node[];
-  links: D3Link[];
+  edges: D3Edge[];
 }
 
 export interface D3Word extends d3.SimulationNodeDatum {
