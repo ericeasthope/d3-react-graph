@@ -1,10 +1,10 @@
 // components/SVG.tsx
 
-import React, { ReactNode } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 interface Props {
-  children?: ReactNode;
+  children?: JSX.Element;
   centerOrigin?: boolean;
 }
 

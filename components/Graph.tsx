@@ -1,31 +1,33 @@
 // components/Graph.tsx
 
-import React, { ReactNode, useEffect, useRef } from 'react';
-import { D3Node, D3Link } from 'types';
+import React, { useEffect, useRef } from 'react';
+import { D3Node, D3Edge } from 'types';
 import {
   runForceSimulation,
   executeConfigurables,
   executeNodelikeChildren,
-  executeLinklikeChildren,
+  executeEdgelikeChildren,
 } from './utils';
 
 interface Props {
-  children: ReactNode;
+  children: JSX.Element;
   nodes: D3Node[];
-  links: D3Link[];
-  forces: any;
+  edges: D3Edge[];
+  forces: {
+    [key: string]: Record<string, unknown>;
+  };
 }
 
-const Graph = ({ children, nodes, links, forces }: Props): JSX.Element => {
+const Graph = ({ children, nodes, edges, forces }: Props): JSX.Element => {
   // Initialize reference to D3 force simulation
   const simulation = useRef(null);
 
   // Initialize reference to graph SVG container
   const graph = useRef(null);
 
-  // Initialize refences to graph node and link D3 selectors
+  // Initialize refences to graph node and edge D3 selectors
   const node = useRef(null);
-  const link = useRef(null);
+  const edge = useRef(null);
 
   useEffect(() => {
     let destroyer: void | (() => void);
@@ -33,7 +35,7 @@ const Graph = ({ children, nodes, links, forces }: Props): JSX.Element => {
     if (graph.current) {
       const { _simulation, _destroyer } = runForceSimulation(
         nodes,
-        links,
+        edges,
         forces,
       );
       simulation.current = _simulation;
@@ -41,7 +43,7 @@ const Graph = ({ children, nodes, links, forces }: Props): JSX.Element => {
 
       console.log(simulation.current);
 
-      executeConfigurables(React.Children.toArray(children));
+      executeConfigurables(React.Children.toArray(children) as JSX.Element[]);
     }
 
     return destroyer;
@@ -51,25 +53,25 @@ const Graph = ({ children, nodes, links, forces }: Props): JSX.Element => {
     simulation.current.nodes(nodes);
     node.current = executeNodelikeChildren(children, nodes);
 
-    simulation.current.force('link').links(links);
-    link.current = executeLinklikeChildren(children, links);
+    simulation.current.force('link').links(edges);
+    edge.current = executeEdgelikeChildren(children, edges);
 
     simulation.current.on('tick', () => {
       Object.values(node.current).map((n: { name: string; tick: () => void }) =>
         n.tick ? n.tick() : null,
       );
-      Object.values(link.current).map((l: { name: string; tick: () => void }) =>
+      Object.values(edge.current).map((l: { name: string; tick: () => void }) =>
         l.tick ? l.tick() : null,
       );
     });
-  }, [nodes, links]);
+  }, [nodes, edges]);
 
-  // useEffect(() => {}, [links]);
+  // useEffect(() => {}, [edges]);
   // useEffect(() => {}, [forces]);
 
   return (
     <g ref={graph}>
-      <g className="links" />
+      <g className="edges" />
       <g className="nodes" />
     </g>
   );
