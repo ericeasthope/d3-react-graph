@@ -11,6 +11,7 @@ interface Props {
 
 const Circle = ({
   nodes,
+  onMouseOver,
   title,
 }: Props): JSX.Element & {
   name: string;
@@ -49,6 +50,10 @@ const Circle = ({
 
   circle.append('title').text(title);
 
+  circle
+    .on('mouseover', onMouseOver)
+    .on('mouseout', onMouseOut);
+
   return {
     name: 'circle',
     tick: () => circle.attr('cx', (d) => d.x).attr('cy', (d) => d.y),
@@ -63,19 +68,19 @@ const Circle = ({
 export default Circle;
 
 /*
+d3
+  .drag()
+  .on('start', dragstarted)
+  .on('drag', dragged)
+  .on('end', dragended)
+
 const Node = ({
   node,
   color,
-}: // mouseoutEvent,
-// mouseoverEvent,
-// onClickEvent,
-// onMouseExitEvent,
-// onMouseEnterEvent,
-// doubleClickEvent,
+}:
 NodeProps) => {
     /*
     d3.select(ref.current)
-      .on('dblclick', doubleClickEvent)
       .on('mouseover', () => {
         d3.select(ref.current)
           .style('filter', 'url(#blur)');
@@ -94,23 +99,4 @@ NodeProps) => {
           .style('filter', 'url(#blur)');
       });
   });
-
-  return (
-      {/*{node.type === "circle" ? (
-      <g
-        className="node"
-        onMouseLeave={() => onMouseExitEvent(node)}
-        onMouseEnter={() => onMouseEnterEvent(node)}
-        onClick={() => onClickEvent(node)}
-        ref={ref}
-      >
-        <Circle title={node.name} color={color} />
-        {/*<Text label={node.label} />}
-      </g>
-    ) : node.type === "tweet" ? (
-      <TwitterLogo ref={ref} title={node.id} color={color} />
-    ) : null}
-    </>
-  );
-};
 */

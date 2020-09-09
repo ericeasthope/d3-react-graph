@@ -1,9 +1,9 @@
 // components/Node.tsx
 
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 interface Props {
-  children?: ReactNode;
+  children?: JSX.Element;
 }
 
 const Node = ({ children }: Props): JSX.Element => {
@@ -13,10 +13,15 @@ const Node = ({ children }: Props): JSX.Element => {
 export default Node;
 
 /*
+.call((node) =>
+  node.transition().attr("r", function (d) {
+    return 10 - d.depth;
+  })
+)
+
 import styled, { keyframes } from 'styled-components';
 
 interface NodesProps {
-  nodes: D3Node[];
   // node: boolean;
   // colorScaleType: string;
   // colorScale: string;
@@ -41,15 +46,7 @@ NodesProps) => {
       {/*nodes.map((node: D3Node, index: number) => {
         return (
           <Node
-            key={index}
-            node={node}
             color={color(node.group.toString())}
-            // mouseoverEvent={mouseoverEvent}
-            // mouseoutEvent={mouseoutEvent}
-            // doubleClickEvent={doubleClickEvent}
-            // onMouseEnterEvent={onMouseEnterEvent}
-            // onMouseExitEvent={onMouseExitEvent}
-            // onClickEvent={onClickEvent}
           />
         );
     </g>
@@ -105,4 +102,34 @@ export const ClickableNode = styled.circle`
     // animation: ${easeOutElastic} 2s;
   }
 `;
+
+
+var node = svg
+  .append("g")
+  .attr("class", "nodes")
+  .selectAll("circle")
+  .data(graph.nodes)
+  .enter()
+  .append("circle")
+  .attr("r", function (d) {
+    return Math.sqrt(8 * Math.PI * d.year);
+  })
+  .attr("fill", function (d) {
+    return color(Math.sqrt(d.count / maxCount));
+  })
+  .call(
+    d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended)
+  )
+  .on("mouseover", function (d) {
+    div.transition().duration(250).style("opacity", 1.0);
+
+    return div
+      .html(d.id + ": " + d.title)
+      .style("left", d3.event.pageX + "px")
+      .style("top", d3.event.pageY + "px");
+  })
+
+  .on("mouseout", function (d) {
+    return div.transition().duration(250).style("opacity", 0);
+  });
 */

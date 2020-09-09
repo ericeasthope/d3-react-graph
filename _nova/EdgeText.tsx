@@ -1,20 +1,18 @@
-// components/LinkText.tsx
+// components/EdgeText.tsx
 
-import React, { ReactNode } from 'react';
 import * as d3 from 'd3';
-
-import { D3Link } from 'types';
+import { D3Edge } from 'types';
 
 interface Props {
   children: JSX.Element[];
-  links?: D3Link[];
+  edges?: D3Edge[];
 }
 
-const LinkText = ({ children, links }: Props): JSX.Element => {
+const EdgeText = ({ children, edges }: Props): JSX.Element => {
   const g = d3
-    .select('.links')
+    .select('.edges')
     .selectAll('g')
-    .data(links)
+    .data(edges)
     .join(
       (enter) => enter.append('g'),
       (update) => update,
@@ -56,10 +54,10 @@ const LinkText = ({ children, links }: Props): JSX.Element => {
   const tick = () => {
     g
       /*
-      .attr('x1', (d: D3Link & { source: { x: number } }) => d.source.x)
-      .attr('y1', (d: D3Link & { source: { y: number } }) => d.source.y)
-      .attr('x2', (d: D3Link & { target: { x: number } }) => d.target.x)
-      .attr('y2', (d: D3Link & { target: { y: number } }) => d.target.y);
+      .attr('x1', (d: D3Edge & { source: { x: number } }) => d.source.x)
+      .attr('y1', (d: D3Edge & { source: { y: number } }) => d.source.y)
+      .attr('x2', (d: D3Edge & { target: { x: number } }) => d.target.x)
+      .attr('y2', (d: D3Edge & { target: { y: number } }) => d.target.y);
       */
       .attr('transform', function (d) {
         return (
@@ -82,13 +80,13 @@ const LinkText = ({ children, links }: Props): JSX.Element => {
   };
 };
 
-export default LinkText;
+export default EdgeText;
 
 /*
 const Text = React.forwardRef(({ title, color, width, text }, ref) => {
   return (
     <text
-      className="link"
+      className="edge"
       ref={ref}
       textAnchor="middle"
       style={{

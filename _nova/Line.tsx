@@ -2,10 +2,10 @@
 
 import * as d3 from 'd3';
 
-import { D3Link } from 'types';
+import { D3Edge } from 'types';
 
 interface Props {
-  links?: D3Link[];
+  edges?: D3Edge[];
   stroke?: {
     enterStroke: string;
     updateStroke: string;
@@ -14,12 +14,12 @@ interface Props {
   strokeWidth?:
     | number
     | string
-    | ((d: D3Link) => number)
-    | ((d: D3Link) => string);
+    | ((d: D3Edge) => number)
+    | ((d: D3Edge) => string);
 }
 
 const Line = ({
-  links,
+  edges,
   stroke,
   strokeWidth,
 }: Props): JSX.Element & {
@@ -27,10 +27,10 @@ const Line = ({
   tick: () => void;
 } => {
   const { enterStroke, updateStroke, exitStroke } = stroke;
-  const link = d3
-    .select('.links')
+  const edge = d3
+    .select('.edges')
     .selectAll('line')
-    .data(links)
+    .data(edges)
     .join(
       (enter) => enter.append('line').attr('stroke', enterStroke),
       (update) => update.attr('stroke', updateStroke),
@@ -44,17 +44,17 @@ const Line = ({
     // stroke: '#111',
     strokeOpacity: 1,
   }}
-  strokeWidth={Math.sqrt(link.value ? link.value : 1)}
+  strokeWidth={Math.sqrt(edge.value ? edge.value : 1)}
   */
 
   return {
     name: 'line',
     tick: () => {
-      link
-        .attr('x1', (d: D3Link & { source: { x: number } }) => d.source.x)
-        .attr('y1', (d: D3Link & { source: { y: number } }) => d.source.y)
-        .attr('x2', (d: D3Link & { target: { x: number } }) => d.target.x)
-        .attr('y2', (d: D3Link & { target: { y: number } }) => d.target.y);
+      edge
+        .attr('x1', (d: D3Edge & { source: { x: number } }) => d.source.x)
+        .attr('y1', (d: D3Edge & { source: { y: number } }) => d.source.y)
+        .attr('x2', (d: D3Edge & { target: { x: number } }) => d.target.x)
+        .attr('y2', (d: D3Edge & { target: { y: number } }) => d.target.y);
     },
   };
 };
@@ -66,7 +66,7 @@ const Line = React.forwardRef(({ title, color, width, dashed }, ref) => {
   return (
     <line
       stroke={color}
-      className="link"
+      className="edge"
       ref={ref}
       strokeDasharray={dashed ? '2' : null}
       strokeWidth={Math.sqrt(width)}
