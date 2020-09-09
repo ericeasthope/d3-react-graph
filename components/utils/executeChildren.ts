@@ -1,12 +1,25 @@
 // components/utils/executeChildren.ts
 
-export const executeNodelikeChildren = (children, nodes) => {
+import React from 'react';
+import { D3Node, D3Edge } from 'types';
+
+export const executeNodelikeChildren = (
+  children: JSX.Element,
+  nodes: D3Node[],
+): {
+  [key: string]: {
+    tick: {
+      name: string;
+      tick: () => void;
+    };
+  };
+} => {
   const node = {};
 
-  React.Children.toArray(children).map((c) => {
+  React.Children.toArray(children).map((c: JSX.Element) => {
     // Check for a node-like component
     if (c.type.name === 'Node') {
-      React.Children.toArray(c.props.children).map((n) => {
+      React.Children.toArray(c.props.children).map((n: JSX.Element) => {
         // Execute the node-like component as though it were a function
         const child = n.type({ ...n.props, nodes: nodes });
 
@@ -21,23 +34,33 @@ export const executeNodelikeChildren = (children, nodes) => {
   return node;
 };
 
-export const executeLinklikeChildren = (children, links) => {
-  const link = {};
+export const executeEdgelikeChildren = (
+  children: JSX.Element,
+  edges: D3Edge[],
+): {
+  [key: string]: {
+    tick: {
+      name: string;
+      tick: () => void;
+    };
+  };
+} => {
+  const edge = {};
 
-  React.Children.toArray(children).map((c) => {
-    // Check for a link-like component
-    if (c.type.name === 'Link') {
-      React.Children.toArray(c.props.children).map((l) => {
-        // Execute the link-like component as though it were a function
-        const child = l.type({ ...l.props, links: links });
+  React.Children.toArray(children).map((c: JSX.Element) => {
+    // Check for a edge-like component
+    if (c.type.name === 'Edge') {
+      React.Children.toArray(c.props.children).map((l: JSX.Element) => {
+        // Execute the edge-like component as though it were a function
+        const child = l.type({ ...l.props, edges: edges });
 
-        // Keep the link-like component's tick function
-        link[child.name] = {
+        // Keep the edge-like component's tick function
+        edge[child.name] = {
           tick: child.tick,
         };
       });
     }
   });
 
-  return link;
+  return edge;
 };

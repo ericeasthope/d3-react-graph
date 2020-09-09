@@ -1,8 +1,15 @@
-// utils/index.ts
+// components/utils/index.ts
 
 import runForceSimulation from './runForceSimulation';
 import executeConfigurables from './executeConfigurables';
-// import getForces from 'utils/getForces';
-// import getDrag from 'utils/getDrag';
+import {
+  executeNodelikeChildren,
+  executeEdgelikeChildren,
+} from './executeChildren';
 
-export { runForceSimulation, executeConfigurables };
+export {
+  runForceSimulation,
+  executeConfigurables,
+  executeNodelikeChildren,
+  executeEdgelikeChildren,
+};
