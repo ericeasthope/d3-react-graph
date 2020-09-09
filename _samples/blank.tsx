@@ -1,34 +1,41 @@
 // _samples/blank.tsx
 
-import { Graph, Node, Link, BlankNode, BlankLink } from 'components';
+import React from 'react';
+import { Graph, Node, Edge, BlankNode, BlankEdge } from 'components';
+import { D3Node, D3Edge } from 'types';
 
-interface Props {}
+interface Props {
+  nodes?: D3Node[];
+  edges?: D3Edge[];
+}
 
-export default (props: Props) => (
+const Blank = (props: Props): JSX.Element => (
   <Graph {...props}>
-    <Link>
-      <BlankLink
-        title={(d) => ``}
+    <Edge>
+      <BlankEdge
+        title={() => null}
         attrs={{}}
         styles={{}}
-        dataKey={(d) => d}
-        onMouseOver={(d) => {}}
-        onMouseOut={(d) => {}}
-        onClick={(d) => {}}
-        onDoubleClick={(d) => {}}
+        dataKey={(d: D3Edge) => d}
+        onMouseOver={() => null}
+        onMouseOut={() => null}
+        onClick={() => null}
+        onDoubleClick={() => null}
       />
-    </Link>
+    </Edge>
     <Node>
       <BlankNode
-        title={(d) => d.id}
+        title={(d: D3Node) => d.id}
         attrs={{}}
         styles={{}}
-        dataKey={(d) => d.id}
-        onMouseOver={(d) => {}}
-        onMouseOut={(d) => {}}
-        onClick={(d) => {}}
-        onDoubleClick={(d) => {}}
+        dataKey={(d: D3Node) => d.id}
+        onMouseOver={() => null}
+        onMouseOut={() => null}
+        onClick={() => null}
+        onDoubleClick={() => null}
       />
     </Node>
   </Graph>
 );
+
+export default Blank;
