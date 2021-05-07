@@ -1,0 +1,22 @@
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var d3 = _interopRequireWildcard(require("d3"));
+
+// components/Node.ts
+var Node = function Node(_ref) {
+  var nodes = _ref.nodes,
+      dataKey = _ref.dataKey;
+  var blank = d3.select('.nodes').selectAll('g').data(nodes, dataKey);
+  return blank;
+};
+
+var _default = Node;
+exports["default"] = _default;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL2NvbXBvbmVudHMvbm9kZXMvTm9kZS50cyJdLCJuYW1lcyI6WyJOb2RlIiwibm9kZXMiLCJkYXRhS2V5IiwiYmxhbmsiLCJkMyIsInNlbGVjdCIsInNlbGVjdEFsbCIsImRhdGEiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUVBOztBQUZBO0FBVUEsSUFBTUEsSUFBSSxHQUFHLFNBQVBBLElBQU8sT0FHeUQ7QUFBQSxNQUZwRUMsS0FFb0UsUUFGcEVBLEtBRW9FO0FBQUEsTUFEcEVDLE9BQ29FLFFBRHBFQSxPQUNvRTtBQUNwRSxNQUFNQyxLQUFLLEdBQUdDLEVBQUUsQ0FBQ0MsTUFBSCxDQUFVLFFBQVYsRUFBb0JDLFNBQXBCLENBQThCLEdBQTlCLEVBQW1DQyxJQUFuQyxDQUF3Q04sS0FBeEMsRUFBK0NDLE9BQS9DLENBQWQ7QUFDQSxTQUFPQyxLQUFQO0FBQ0QsQ0FORDs7ZUFRZUgsSSIsInNvdXJjZXNDb250ZW50IjpbIi8vIGNvbXBvbmVudHMvTm9kZS50c1xuXG5pbXBvcnQgKiBhcyBkMyBmcm9tICdkMyc7XG5pbXBvcnQgeyBEM05vZGUgfSBmcm9tICd0eXBlcyc7XG5cbmludGVyZmFjZSBQcm9wcyB7XG4gIG5vZGVzPzogRDNOb2RlW107XG4gIGRhdGFLZXk/OiAoZDogRDNOb2RlKSA9PiBzdHJpbmc7XG59XG5cbmNvbnN0IE5vZGUgPSAoe1xuICBub2RlcyxcbiAgZGF0YUtleSxcbn06IFByb3BzKTogZDMuU2VsZWN0aW9uPGQzLkJhc2VUeXBlLCBEM05vZGUsIGQzLkJhc2VUeXBlLCB1bmtub3duPiA9PiB7XG4gIGNvbnN0IGJsYW5rID0gZDMuc2VsZWN0KCcubm9kZXMnKS5zZWxlY3RBbGwoJ2cnKS5kYXRhKG5vZGVzLCBkYXRhS2V5KTtcbiAgcmV0dXJuIGJsYW5rO1xufTtcblxuZXhwb3J0IGRlZmF1bHQgTm9kZTtcbiJdfQ==

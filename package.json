@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "Eric Easthope, eric.easthope@me.com, @ericeasthope",
   "license": "MIT",
-  "private": true,
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ericeasthope/fancy-graph.git"
@@ -13,7 +13,7 @@
   },
   "scripts": {
     "dev": "next",
-    "build": "./node_modules/.bin/babel components --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
+    "build": "./node_modules/.bin/babel components --out-dir dist --extensions \".ts,.tsx\" --source-maps inline",
     "start": "next start",
     "export": "next export",
     "prettify": "prettier --write \"**/*.ts\" \"**/*.js\"",
@@ -25,9 +25,11 @@
     "d3": "^5.16.0",
     "d3-force-3d": "^2.1.0",
     "d3-force-surface": "^0.5.7",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
     "styled-components": "^5.1.1"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",
